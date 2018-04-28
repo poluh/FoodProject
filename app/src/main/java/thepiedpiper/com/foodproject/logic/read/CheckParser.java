@@ -14,8 +14,7 @@ public class CheckParser {
         CSVOpener csvOpener = new CSVOpener("/Users/sergey/Desktop/FAO.csv");
         try {
             csvOpener.read();
-        } catch (IOException ignored) {
-        }
+        } catch (IOException ignored) { }
         csvOpener.getCountries().forEach(country -> {
             System.out.println(country.toString());
         });
