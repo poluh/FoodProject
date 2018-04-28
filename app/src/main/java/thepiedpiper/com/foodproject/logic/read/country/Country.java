@@ -2,6 +2,7 @@ package thepiedpiper.com.foodproject.logic.read.country;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class Country {
         this.areaCode = Integer.parseInt(values[1]);
         this.area = values[2];
         this.coordinates = new LatLng(Double.valueOf(values[3]), Double.valueOf(values[4]));
+        items = new ArrayList<>();
     }
 
     public void addItem(Item item) {
