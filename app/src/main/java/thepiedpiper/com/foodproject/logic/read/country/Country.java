@@ -53,9 +53,7 @@ public class Country {
         Country country = (Country) o;
         return areaCode == country.areaCode &&
                 Objects.equals(areaAbbreviation, country.areaAbbreviation) &&
-                Objects.equals(area, country.area) &&
-                Objects.equals(coordinates, country.coordinates) &&
-                Objects.equals(items, country.items);
+                Objects.equals(area, country.area);
     }
 
     @Override

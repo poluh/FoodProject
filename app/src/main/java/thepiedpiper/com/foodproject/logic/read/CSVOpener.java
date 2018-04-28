@@ -39,7 +39,7 @@ public class CSVOpener {
             }
             Item item = new Item(ofDates, line[3], line[4]);
             if (countries.contains(country)) {
-                country.addItem(item);
+                countries.get(countries.indexOf(country)).addItem(item);
             } else {
                 countries.add(country);
                 country.addItem(item);

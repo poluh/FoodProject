@@ -6,6 +6,11 @@ import android.support.annotation.RequiresApi;
 
 import java.io.IOException;
 
+import thepiedpiper.com.foodproject.logic.read.country.Country;
+import thepiedpiper.com.foodproject.logic.read.country.Item;
+import thepiedpiper.com.foodproject.logic.read.filter.CountryFilter;
+import thepiedpiper.com.foodproject.logic.read.filter.Filter;
+
 public class CheckParser {
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -16,7 +21,10 @@ public class CheckParser {
             csvOpener.read();
         } catch (IOException ignored) { }
         csvOpener.getCountries().forEach(country -> {
-            System.out.println(country.toString());
+            //System.out.println(country.toString());
         });
+
+        Filter<Country, Item> filter = new CountryFilter();
+        System.out.println(filter.max(csvOpener.getCountries(), 1961));
     }
 }
