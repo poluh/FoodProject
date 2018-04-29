@@ -6,9 +6,15 @@ import android.support.annotation.RequiresApi;
 import com.google.maps.android.MarkerManager;
 import com.opencsv.CSVReader;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,10 +42,9 @@ public class CSVOpener {
 
     public CSVOpener() {}
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public CSVOpener read() throws IOException {
         if (path.isEmpty()) path = "app/src/main/res/raw/FAO.csv";
-        CSVReader reader = new CSVReader(Files.newBufferedReader(Paths.get(path), Charset.forName("windows-1251")));
+        CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(new File(path))));
         countries = new ArrayList<>();
 
         String[] line;
