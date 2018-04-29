@@ -35,8 +35,6 @@ public class CSVOpener {
         CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(new File(path))));
         countries = new ArrayList<>();
 
-
-
         String[] line;
         while ((line = reader.readNext()) != null) {
             if (!line[1].contains("Area Code")) {

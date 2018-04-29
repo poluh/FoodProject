@@ -1,16 +1,29 @@
 package thepiedpiper.com.foodproject.logic.read.country;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class Item implements Comparable<Item> {
 
     public static int UNIT = 1000;
     public static int START_YEAR = 1961;
-    public static int END_YEAR = 2013;
-    public static int AMONG = END_YEAR - START_YEAR + 1;
+    public static int END_YEAR = 2014;
+    public static int AMONG = END_YEAR - START_YEAR;
     private int itemCode;
     private String itemName;
     private Element element;
     private Country linkToCountry;
     private int[] ofDates;
+
+    public static List<Integer> allYears() {
+        List<Integer> years = new ArrayList<>();
+        for (int year = Item.START_YEAR; year < Item.END_YEAR; year++) {
+            years.add(year);
+        }
+        return years;
+
+    }
 
     public Item(int[] ofDates, Country country, String... values) {
         this.itemCode = Integer.parseInt(values[0]);
