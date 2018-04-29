@@ -3,20 +3,24 @@ package thepiedpiper.com.foodproject
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Spinner
-import android.widget.Switch
 import thepiedpiper.com.foodproject.logic.read.CSVOpener
+import thepiedpiper.com.foodproject.logic.read.country.Item
 
 class FilterActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val food = CSVOpener.ALL_FOOD
+        val feed = CSVOpener.ALL_FEED
         setContentView(R.layout.activity_filter)
 
-        CSVOpener().read(applicationContext)
+        val spinner_item = findViewById<Spinner>(R.id.filter_spinner_item)
+        spinner_item.adapter = ItemsAdapter(this, food)
 
-        var spinner = findViewById<Spinner>(R.id.filter_spinner_item)
-        spinner.adapter = ItemsAdapter(this, CSVOpener.ALL_FOOD)
+        val spinner_year = findViewById<Spinner>(R.id.filter_spinner_year)
+        spinner_year.adapter = YearAdapter(this, Item.allYears())
 
-        findViewById<android.support.v7.widget.SwitchCompat>(R.id.filter_switch).setOnCheckedChangeListener{
-            buttonView, isChecked -> spinner.adapter = ItemsAdapter(this, if (isChecked) CSVOpener.ALL_FEED else CSVOpener.ALL_FOOD) }
+        findViewById<android.support.v7.widget.SwitchCompat>(R.id.filter_switch).setOnCheckedChangeListener {
+            buttonView, isChecked -> spinner_item.adapter = ItemsAdapter(this, if (isChecked) feed else food) }
     }
 }
