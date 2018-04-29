@@ -34,7 +34,7 @@ public class Country implements Comparable<Country> {
         for (Country country : countries) {
             for (Item currentItem : country.getItems()) {
                 if (currentItem.getItemName().equals(item.getItemName())) {
-                    answer.put(country.getAreaAbbreviation(), item.getOfDate(year));
+                    answer.put(country.getAreaAbbreviation(), currentItem.getOfDate(year));
                 }
             }
         }
