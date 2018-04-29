@@ -41,6 +41,15 @@ public class Country implements Comparable<Country> {
         return answer;
     }
 
+    public static Country searchOfName(String countryName) {
+        for (Country country : countries) {
+            if (country.getArea().equals(countryName)) {
+                return country;
+            }
+        }
+        throw new IllegalArgumentException("Unknown country");
+    }
+
     public static int maxAmount(Map<String, Integer> values) {
         int max = -1;
         for (Map.Entry entry : values.entrySet()) {
