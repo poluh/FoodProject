@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import thepiedpiper.com.foodproject.logic.read.country.Item;
-
 public class YearAdapter extends ArrayAdapter<Integer> {
 
     private List<Integer> items;

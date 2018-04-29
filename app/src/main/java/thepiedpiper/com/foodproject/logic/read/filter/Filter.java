@@ -2,8 +2,6 @@ package thepiedpiper.com.foodproject.logic.read.filter;
 
 import java.util.List;
 
-import thepiedpiper.com.foodproject.logic.read.country.Country;
-
 public interface Filter<E, T> {
     E searchOfName(List<E> values, String name);
 

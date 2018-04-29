@@ -116,7 +116,7 @@ class MainActivity :
 
             style.setStrokeWidth(0F)
 
-            layer.setOnFeatureClickListener({ Toast.makeText(this@MainActivity, it.properties.toString(), Toast.LENGTH_LONG).show() })
+            layer.setOnFeatureClickListener({ Toast.makeText(this@MainActivity, it.getProperty("name"), Toast.LENGTH_SHORT).show() })
 
             if (item != null && year != null) {
                 val countries = Country.getItemAmountByYear(item, year)
@@ -124,10 +124,10 @@ class MainActivity :
                 if (max == 0) max = 100000
 
                 for (country in layer.features) {
-                    if (countries.containsKey(country.id)){
+                    if (countries.containsKey(country.id)) {
                         val polygonStyle = GeoJsonPolygonStyle()
                         val kkk = countries[country.id]!!
-                        polygonStyle.fillColor = Color.argb((255 * (countries[country.id]!!.toDouble() / max.toDouble())).toInt(),  255, 0, 0)
+                        polygonStyle.fillColor = Color.argb((255 * (countries[country.id]!!.toDouble() / max.toDouble())).toInt(), 30, 65, 235)
                         polygonStyle.setStrokeWidth(0F)
                         country.polygonStyle = polygonStyle
                     }

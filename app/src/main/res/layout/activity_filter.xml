@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -15,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Food" />
+            android:text="Food"
+            android:textSize="@dimen/switch_text" />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/filter_switch"
@@ -23,13 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
-            android:theme="@style/SCBSwitch"/>
+            android:theme="@style/SCBSwitch" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Feed" />
+            android:text="Feed"
+            android:textSize="@dimen/switch_text" />
 
     </LinearLayout>
 
@@ -45,7 +48,10 @@
         android:id="@+id/filter_spinner_year"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="48dp">
+        android:layout_marginBottom="72dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginTop="24dp">
 
     </Spinner>
 
@@ -53,6 +59,7 @@
         android:id="@+id/accept_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Применить"/>
+        android:text="Применить"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

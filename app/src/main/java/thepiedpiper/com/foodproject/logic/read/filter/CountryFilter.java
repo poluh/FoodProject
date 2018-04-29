@@ -1,10 +1,6 @@
 package thepiedpiper.com.foodproject.logic.read.filter;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import thepiedpiper.com.foodproject.logic.read.country.Country;
