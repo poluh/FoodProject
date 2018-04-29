@@ -22,9 +22,7 @@ public class CheckParser {
         } catch (IOException e) {
             e.fillInStackTrace();
         }
-        csvOpener.getCountries().forEach(country -> {
-            //System.out.println(country.toString());
-        });
+
         System.out.println(CSVOpener.ALL_ITEMS);
 
         Filter<Country, Item> filter = new CountryFilter();

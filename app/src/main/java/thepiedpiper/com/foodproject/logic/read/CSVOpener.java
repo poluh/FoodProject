@@ -30,7 +30,7 @@ import thepiedpiper.com.foodproject.logic.read.country.Item;
 
 public class CSVOpener {
 
-    private String path = "";
+    private String path = "app/src/main/res/raw/fao.csv";
     private List<Country> countries;
     public static List<Item> ALL_ITEMS = new ArrayList<>();
     public static List<Item> ALL_FEED = new ArrayList<>();
@@ -43,7 +43,6 @@ public class CSVOpener {
     public CSVOpener() {}
 
     public CSVOpener read() throws IOException {
-        if (path.isEmpty()) path = "app/src/main/res/raw/FAO.csv";
         CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(new File(path))));
         countries = new ArrayList<>();
 
