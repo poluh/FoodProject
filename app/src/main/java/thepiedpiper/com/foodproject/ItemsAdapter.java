@@ -24,7 +24,17 @@ class ItemsAdapter extends ArrayAdapter<Item> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return super.getView(position, convertView, parent);
+        View listItemView = convertView;
+
+        if (listItemView == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            listItemView = inflater.inflate(R.layout.item_spinner, parent, false);
+        }
+
+        TextView textView = (TextView) listItemView.findViewById(R.id.filter_spinner_text);
+        textView.setText(items.get(position).getItemName());
+
+        return listItemView;
     }
 
     @Override

@@ -1,12 +1,9 @@
 package thepiedpiper.com.foodproject.logic.read;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.content.Context;
 
 import com.opencsv.CSVReader;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -19,23 +16,16 @@ import thepiedpiper.com.foodproject.logic.read.country.Item;
 
 public class CSVOpener {
 
-    private String path = "app/src/main/res/raw/fao.csv";
     private List<Country> countries;
     public static List<Item> ALL_ITEMS = new ArrayList<>();
     public static List<Item> ALL_FEED = new ArrayList<>();
     public static List<Item> ALL_FOOD = new ArrayList<>();
 
-    public CSVOpener(String path) {
-        this.path = path;
-    }
-
     public CSVOpener() {}
 
-    public CSVOpener read() throws IOException {
-        CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(new File(path))));
+    public CSVOpener read(Context context) throws IOException {
+        CSVReader reader = new CSVReader(new InputStreamReader(context.getAssets().open("fao.csv")));
         countries = new ArrayList<>();
-
-
 
         String[] line;
         while ((line = reader.readNext()) != null) {

@@ -11,8 +11,7 @@ class FilterActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
 
-        CSVOpener().read()
-        val kkkkk = CSVOpener.ALL_FEED
+        CSVOpener().read(applicationContext)
 
         var spinner = findViewById<Spinner>(R.id.filter_spinner_item)
         spinner.adapter = ItemsAdapter(this, CSVOpener.ALL_FOOD)
