@@ -1,7 +1,9 @@
 package thepiedpiper.com.foodproject
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.res.Resources
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.data.geojson.GeoJsonLayer
 import org.json.JSONException
+import thepiedpiper.com.foodproject.logic.read.CSVOpener
 import java.io.IOException
 
 
@@ -28,6 +31,8 @@ class MainActivity :
         AppCompatActivity(),
         OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
+    var progresssDialog: ProgressDialog? = null
+
     override fun onConnectionFailed(p0: ConnectionResult) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -37,6 +42,11 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        openMap()
+        if (!CSVOpener.isSorted) ParseTask().execute()
+    }
+
+    fun openMap() {
         setContentView(R.layout.activity_maps)
 
         val mapFragment: SupportMapFragment? =
@@ -99,6 +109,29 @@ class MainActivity :
             Log.e("IOException", e.getLocalizedMessage())
         } catch (e: JSONException) {
             Log.e("JSONException", e.getLocalizedMessage())
+        }
+    }
+
+    private inner class ParseTask : AsyncTask<Void, Void?, Void>() {
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            progresssDialog = ProgressDialog.show(this@MainActivity, "",
+                    "Parsing data. Please wait...", true)
+        }
+
+        override fun doInBackground(vararg params: Void): Void? {
+            try {
+                CSVOpener().read(applicationContext)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        override fun onPostExecute(result: Void?) {
+            super.onPostExecute(result)
+            progresssDialog?.cancel();
         }
     }
 }

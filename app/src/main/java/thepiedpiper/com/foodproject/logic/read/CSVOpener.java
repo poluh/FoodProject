@@ -20,6 +20,7 @@ public class CSVOpener {
     public static List<Item> ALL_ITEMS = new ArrayList<>();
     public static List<Item> ALL_FEED = new ArrayList<>();
     public static List<Item> ALL_FOOD = new ArrayList<>();
+    public static boolean isSorted = false;
 
     public CSVOpener() {}
 
@@ -56,6 +57,7 @@ public class CSVOpener {
         Collections.sort(ALL_FEED);
         Collections.sort(ALL_FOOD);
         Country.setCountries(countries);
+        isSorted = true;
         return this;
     }
 
