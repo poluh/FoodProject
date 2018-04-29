@@ -53,6 +53,10 @@ public class Item implements Comparable<Item> {
         return element;
     }
 
+    public int getOfDate(int year) {
+        return ofDates[year - START_YEAR];
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(itemName).append("\n");

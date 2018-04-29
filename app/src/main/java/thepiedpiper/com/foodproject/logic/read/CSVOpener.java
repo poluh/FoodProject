@@ -55,6 +55,7 @@ public class CSVOpener {
         Collections.sort(ALL_ITEMS);
         Collections.sort(ALL_FEED);
         Collections.sort(ALL_FOOD);
+        Country.setCountries(countries);
         return this;
     }
 

@@ -1,11 +1,15 @@
 package thepiedpiper.com.foodproject.logic.read.country;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Country implements Comparable<Country> {
@@ -15,6 +19,20 @@ public class Country implements Comparable<Country> {
     private String area;
     private LatLng coordinates;
     private List<Item> items;
+    private static List<Country> countries;
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static Map<String, Integer> getItemAmountByYear(Item item, int year) {
+        Map<String, Integer> answer = new HashMap<>();
+        countries.forEach(country -> {
+            country.getItems().forEach(currentItem -> {
+                if (currentItem.getItemName().equals(item.getItemName())) {
+                    answer.put(country.getAreaAbbreviation(), item.getOfDate(year));
+                }
+            });
+        });
+        return answer;
+    }
 
     public Country(String... values) {
         this.areaAbbreviation = values[0];
@@ -22,6 +40,10 @@ public class Country implements Comparable<Country> {
         this.area = values[2];
         this.coordinates = new LatLng(Double.valueOf(values[3]), Double.valueOf(values[4]));
         items = new ArrayList<>();
+    }
+
+    public static void setCountries(List<Country> countries) {
+        Country.countries = countries;
     }
 
     public void addItem(Item item) {
