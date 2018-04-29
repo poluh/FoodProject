@@ -61,6 +61,13 @@ public class Item implements Comparable<Item> {
         return ofDates[year - START_YEAR];
     }
 
+    public int gerMaxAmount() {
+        int max = -1;
+        for (int currentAmount : ofDates) {
+            max = Math.max(currentAmount, max);
+        }
+        return max;
+    }
 
     @Override
     public String toString() {
