@@ -13,8 +13,6 @@ import thepiedpiper.com.foodproject.logic.read.filter.Filter;
 
 public class CheckParser {
 
-    @TargetApi(Build.VERSION_CODES.O)
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void main(String[] args) {
         CSVOpener csvOpener = new CSVOpener();
         try {

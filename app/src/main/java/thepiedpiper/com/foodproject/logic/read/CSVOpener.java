@@ -1,5 +1,6 @@
 package thepiedpiper.com.foodproject.logic.read;
 
+import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
@@ -24,13 +25,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import thepiedpiper.com.foodproject.R;
 import thepiedpiper.com.foodproject.logic.read.country.Country;
 import thepiedpiper.com.foodproject.logic.read.country.Element;
 import thepiedpiper.com.foodproject.logic.read.country.Item;
 
 public class CSVOpener {
 
-    private String path = "app/src/main/res/raw/fao.csv";
+    private String path = "/Users/sergey/Desktop/FoodProject/app/src/main/res/raw/fao.csv";
     private List<Country> countries;
     public static List<Item> ALL_ITEMS = new ArrayList<>();
     public static List<Item> ALL_FEED = new ArrayList<>();

@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.data.geojson.GeoJsonLayer
 import org.json.JSONException
+import thepiedpiper.com.foodproject.logic.read.CSVOpener
 import java.io.IOException
 
 
@@ -31,15 +32,17 @@ class BasicMapDemoActivity :
 
     val SPB = LatLng(60.0, 30.0)
     val ZOOM_LEVEL = 3f
+    var editText = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
-
         val mapFragment: SupportMapFragment? =
                 supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
+
+
     }
 
     /**
@@ -75,7 +78,10 @@ class BasicMapDemoActivity :
 
             style.setStrokeWidth(4F)
 
-            layer.setOnFeatureClickListener({ Toast.makeText(this@BasicMapDemoActivity, it.properties.toString(), Toast.LENGTH_LONG).show() })
+            layer.setOnFeatureClickListener({
+                Toast.makeText(this@BasicMapDemoActivity,
+                        it.properties.toString(), Toast.LENGTH_LONG).show()
+            })
             layer.addLayerToMap()
 
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SPB, ZOOM_LEVEL))
