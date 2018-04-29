@@ -8,13 +8,25 @@ public class Item {
     public static int AMONG = 53;
     private int itemCode;
     private String itemName;
+    private Element element;
+    private Country linkToCountry;
     private int[] ofDates;
 
+    enum Element {
+        FOOD,
+        FEED;
 
-    public Item(int[] ofDates, String... values) {
+    }
+    public Item(int[] ofDates, Country country, String... values) {
         this.itemCode = Integer.parseInt(values[0]);
         this.itemName = values[1];
+        this.element = values[2].equals("Feed") ? Element.FEED : Element.FOOD;
         this.ofDates = ofDates;
+        this.linkToCountry = country;
+    }
+
+    public Country getLinkToCountry() {
+        return linkToCountry;
     }
 
     public int getItemCode() {
@@ -27,6 +39,10 @@ public class Item {
 
     public int[] getOfDates() {
         return ofDates;
+    }
+
+    public Element getElement() {
+        return element;
     }
 
     @Override
