@@ -41,6 +41,14 @@ public class Country implements Comparable<Country> {
         return answer;
     }
 
+    public static int maxAmount(Map<String, Integer> values) {
+        int max = -1;
+        for (Map.Entry entry : values.entrySet()) {
+            max = Math.max((int) entry.getValue(), max);
+        }
+        return max;
+    }
+
     public Country(String... values) {
         this.areaAbbreviation = values[0];
         this.areaCode = Integer.parseInt(values[1]);
