@@ -19,12 +19,14 @@ public class CheckParser {
         CSVOpener csvOpener = new CSVOpener("/Users/sergey/Desktop/FAO.csv");
         try {
             csvOpener.read();
-        } catch (IOException ignored) { }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         csvOpener.getCountries().forEach(country -> {
             //System.out.println(country.toString());
         });
+        System.out.println(CSVOpener.ALL_ITEMS);
 
         Filter<Country, Item> filter = new CountryFilter();
-        System.out.println(filter.max(csvOpener.getCountries(), 1961));
     }
 }

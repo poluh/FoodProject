@@ -5,18 +5,13 @@ public class Item {
     public static int UNIT = 1000;
     public static int START_YEAR = 1961;
     public static int END_YEAR = 2013;
-    public static int AMONG = 53;
+    public static int AMONG = END_YEAR - START_YEAR + 1;
     private int itemCode;
     private String itemName;
     private Element element;
     private Country linkToCountry;
     private int[] ofDates;
 
-    enum Element {
-        FOOD,
-        FEED;
-
-    }
     public Item(int[] ofDates, Country country, String... values) {
         this.itemCode = Integer.parseInt(values[0]);
         this.itemName = values[1];
