@@ -3,6 +3,7 @@ package thepiedpiper.com.foodproject.logic.read.country;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Item implements Comparable<Item> {
@@ -82,5 +83,12 @@ public class Item implements Comparable<Item> {
         Item o = (Item) obj;
         return this.getItemName().equals(o.getItemName()) &&
                 Arrays.equals(this.getOfDates(), o.getOfDates());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(itemCode, itemName, element, linkToCountry);
+        result = 31 * result + Arrays.hashCode(ofDates);
+        return result;
     }
 }
