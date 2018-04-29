@@ -1,5 +1,7 @@
 package thepiedpiper.com.foodproject.logic.read.country;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -71,7 +73,7 @@ public class Item implements Comparable<Item> {
     }
 
     @Override
-    public int compareTo(Item other) {
+    public int compareTo(@NonNull Item other) {
         return this.getItemName().compareTo(other.itemName);
     }
 
@@ -81,8 +83,7 @@ public class Item implements Comparable<Item> {
             return false;
         }
         Item o = (Item) obj;
-        return this.getItemName().equals(o.getItemName()) &&
-                Arrays.equals(this.getOfDates(), o.getOfDates());
+        return this.getItemName().equals(o.getItemName());
     }
 
     @Override
