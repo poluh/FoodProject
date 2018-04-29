@@ -35,7 +35,7 @@ public class CSVOpener {
                 for (int column = 10; column < 63; column++) {
                     ofDates[column - 10] = !line[column].isEmpty() ? Integer.parseInt(line[column]) : 0;
                 }
-                Item item = new Item(ofDates, country, line[3], line[4], line[5]);
+                Item item = new Item(ofDates, country, line[3], line[4], line[6]);
                 if (!ALL_ITEMS.contains(item)) {
                     ALL_ITEMS.add(item);
                     if (item.getElement() == Element.FEED) {
