@@ -16,11 +16,11 @@ public class CheckParser {
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void main(String[] args) {
-        CSVOpener csvOpener = new CSVOpener("/Users/sergey/Desktop/FAO.csv");
+        CSVOpener csvOpener = new CSVOpener();
         try {
             csvOpener.read();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
         }
         csvOpener.getCountries().forEach(country -> {
             //System.out.println(country.toString());

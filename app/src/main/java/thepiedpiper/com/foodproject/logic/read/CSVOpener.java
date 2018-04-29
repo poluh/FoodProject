@@ -24,7 +24,7 @@ import thepiedpiper.com.foodproject.logic.read.country.Item;
 
 public class CSVOpener {
 
-    private String path;
+    private String path = "";
     private List<Country> countries;
     public static List<Item> ALL_ITEMS = new ArrayList<>();
     public static List<Item> ALL_FEED = new ArrayList<>();
@@ -34,8 +34,11 @@ public class CSVOpener {
         this.path = path;
     }
 
+    public CSVOpener() {}
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void read() throws IOException {
+    public CSVOpener read() throws IOException {
+        if (path.isEmpty()) path = "app/src/main/res/raw/FAO.csv";
         CSVReader reader = new CSVReader(Files.newBufferedReader(Paths.get(path), Charset.forName("windows-1251")));
         countries = new ArrayList<>();
 
@@ -67,6 +70,7 @@ public class CSVOpener {
             Collections.sort(ALL_FEED);
             Collections.sort(ALL_FOOD);
         }
+        return this;
     }
 
     public List<Country> getCountries() {
