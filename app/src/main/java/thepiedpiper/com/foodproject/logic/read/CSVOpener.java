@@ -30,7 +30,7 @@ public class CSVOpener {
     public static List<Item> ALL_FEED = new ArrayList<>();
     public static List<Item> ALL_FOOD = new ArrayList<>();
 
-    CSVOpener(String path) {
+    public CSVOpener(String path) {
         this.path = path;
     }
 

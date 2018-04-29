@@ -1,12 +1,14 @@
 package thepiedpiper.com.foodproject.logic.read.country;
 
+import android.support.annotation.NonNull;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Country {
+public class Country implements Comparable<Country> {
 
     private String areaAbbreviation;
     private int areaCode;
@@ -65,5 +67,10 @@ public class Country {
     public String toString() {
         return areaAbbreviation + " areaCode = " + areaCode + " area = " + area +
                 " coordinates = " + coordinates + " all items = " + items;
+    }
+
+    @Override
+    public int compareTo(@NonNull Country other) {
+        return this.areaAbbreviation.compareTo(other.areaAbbreviation);
     }
 }
