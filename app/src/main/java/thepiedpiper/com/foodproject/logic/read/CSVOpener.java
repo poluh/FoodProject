@@ -1,5 +1,8 @@
 package thepiedpiper.com.foodproject.logic.read;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import com.opencsv.CSVReader;
 
 import java.io.File;
@@ -32,6 +35,8 @@ public class CSVOpener {
         CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(new File(path))));
         countries = new ArrayList<>();
 
+
+
         String[] line;
         while ((line = reader.readNext()) != null) {
             if (!line[1].contains("Area Code")) {
@@ -56,10 +61,10 @@ public class CSVOpener {
                     country.addItem(item);
                 }
             }
-            Collections.sort(ALL_ITEMS);
-            Collections.sort(ALL_FEED);
-            Collections.sort(ALL_FOOD);
         }
+        Collections.sort(ALL_ITEMS);
+        Collections.sort(ALL_FEED);
+        Collections.sort(ALL_FOOD);
         return this;
     }
 

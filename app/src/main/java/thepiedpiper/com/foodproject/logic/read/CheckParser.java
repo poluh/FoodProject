@@ -18,7 +18,5 @@ public class CheckParser {
         }
 
         System.out.println(CSVOpener.ALL_ITEMS);
-
-        Filter<Country, Item> filter = new CountryFilter();
     }
 }
