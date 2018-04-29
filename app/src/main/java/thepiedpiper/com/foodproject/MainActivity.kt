@@ -3,6 +3,7 @@ package thepiedpiper.com.foodproject
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -19,8 +20,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.data.geojson.GeoJsonLayer
+import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
 import org.json.JSONException
 import thepiedpiper.com.foodproject.logic.read.CSVOpener
+import thepiedpiper.com.foodproject.logic.read.country.Country
+import thepiedpiper.com.foodproject.logic.read.country.Item
 import java.io.IOException
 
 
@@ -30,6 +34,12 @@ import java.io.IOException
 class MainActivity :
         AppCompatActivity(),
         OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
+
+    companion object {
+        @JvmStatic
+        var year: Int? = null
+        var item: Item? = null
+    }
 
     var progresssDialog: ProgressDialog? = null
 
@@ -42,13 +52,17 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_maps)
         openMap()
         if (!CSVOpener.isSorted) ParseTask().execute()
     }
 
-    fun openMap() {
-        setContentView(R.layout.activity_maps)
+    override fun onResume() {
+        super.onResume()
+        openMap()
+    }
 
+    fun openMap() {
         val mapFragment: SupportMapFragment? =
                 supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
@@ -75,6 +89,7 @@ class MainActivity :
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap ?: return
 
+        // set styles
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
@@ -94,6 +109,7 @@ class MainActivity :
             isRotateGesturesEnabled = false
         }
 
+        // draw polygons
         try {
             var layer = GeoJsonLayer(googleMap, R.raw.countries_geo, getApplicationContext())
             var style = layer.getDefaultPolygonStyle()
@@ -101,6 +117,23 @@ class MainActivity :
             style.setStrokeWidth(0F)
 
             layer.setOnFeatureClickListener({ Toast.makeText(this@MainActivity, it.properties.toString(), Toast.LENGTH_LONG).show() })
+
+            if (item != null && year != null) {
+                val countries = Country.getItemAmountByYear(item, year)
+                var max = Country.maxAmount(countries)
+                if (max == 0) max = 100000
+
+                for (country in layer.features) {
+                    if (countries.containsKey(country.id)){
+                        val polygonStyle = GeoJsonPolygonStyle()
+                        val kkk = countries[country.id]!!
+                        polygonStyle.fillColor = Color.argb((255 * (countries[country.id]!!.toDouble() / max.toDouble())).toInt(),  255, 0, 0)
+                        polygonStyle.setStrokeWidth(0F)
+                        country.polygonStyle = polygonStyle
+                    }
+                }
+            }
+
             layer.addLayerToMap()
 
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_POS, DEFAULT_ZOOM_LEVEL))

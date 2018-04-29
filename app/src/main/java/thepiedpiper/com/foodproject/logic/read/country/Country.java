@@ -29,7 +29,7 @@ public class Country implements Comparable<Country> {
         items = new ArrayList<>();
     }
 
-    public static Map<String, Integer> getItemAmountByYear(Item item, int year) {
+    public static Map<String, Integer> getItemAmountByYear(Item item, Integer year) {
         Map<String, Integer> answer = new HashMap<>();
         for (Country country : countries) {
             for (Item currentItem : country.getItems()) {
@@ -93,7 +93,6 @@ public class Country implements Comparable<Country> {
     public List<Item> getItems() {
         return items;
     }
-
 
     @Override
     public boolean equals(Object o) {
