@@ -3,6 +3,7 @@ package thepiedpiper.com.foodproject.logic.read;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import com.google.maps.android.MarkerManager;
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
@@ -11,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +63,9 @@ public class CSVOpener {
                     country.addItem(item);
                 }
             }
+            Collections.sort(ALL_ITEMS);
+            Collections.sort(ALL_FEED);
+            Collections.sort(ALL_FOOD);
         }
     }
 

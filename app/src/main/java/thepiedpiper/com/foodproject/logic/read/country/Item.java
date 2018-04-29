@@ -1,6 +1,6 @@
 package thepiedpiper.com.foodproject.logic.read.country;
 
-public class Item {
+public class Item implements Comparable<Item> {
 
     public static int UNIT = 1000;
     public static int START_YEAR = 1961;
@@ -49,5 +49,10 @@ public class Item {
             year++;
         }
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Item other) {
+        return this.getItemName().compareTo(other.itemName);
     }
 }
