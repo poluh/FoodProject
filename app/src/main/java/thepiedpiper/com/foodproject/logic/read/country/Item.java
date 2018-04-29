@@ -1,6 +1,7 @@
 package thepiedpiper.com.foodproject.logic.read.country;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -71,5 +72,15 @@ public class Item implements Comparable<Item> {
     @Override
     public int compareTo(Item other) {
         return this.getItemName().compareTo(other.itemName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Item o = (Item) obj;
+        return this.getItemName().equals(o.getItemName()) &&
+                Arrays.equals(this.getOfDates(), o.getOfDates());
     }
 }
