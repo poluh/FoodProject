@@ -22,13 +22,11 @@ public class CountryFilter implements Filter<Country, Item> {
         throw new IllegalArgumentException("Unknown country name");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public Item max(Country country) throws NullPointerException {
         return max(country, -1);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public Item max(List<Country> countries, String countryName) {
         return max(searchOfName(countries, countryName));

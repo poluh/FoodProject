@@ -1,6 +1,8 @@
 package thepiedpiper.com.foodproject.logic.read;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.opencsv.CSVReader;
 
@@ -20,8 +22,7 @@ public class CSVOpener {
     public static List<Item> ALL_ITEMS = new ArrayList<>();
     public static List<Item> ALL_FEED = new ArrayList<>();
     public static List<Item> ALL_FOOD = new ArrayList<>();
-
-    public CSVOpener() {}
+    public static boolean isSorted = false;
 
     public CSVOpener read(Context context) throws IOException {
         CSVReader reader = new CSVReader(new InputStreamReader(context.getAssets().open("fao.csv")));
@@ -56,6 +57,7 @@ public class CSVOpener {
         Collections.sort(ALL_FEED);
         Collections.sort(ALL_FOOD);
         Country.setCountries(countries);
+        isSorted = true;
         return this;
     }
 

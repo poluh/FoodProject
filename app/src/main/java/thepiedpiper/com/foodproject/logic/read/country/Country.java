@@ -21,16 +21,23 @@ public class Country implements Comparable<Country> {
     private List<Item> items;
     private static List<Country> countries;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Country(String areaAb, int areaCode, String area, LatLng latLng) {
+        this.areaAbbreviation = areaAb;
+        this.areaCode = areaCode;
+        this.area = area;
+        this.coordinates = latLng;
+        items = new ArrayList<>();
+    }
+
     public static Map<String, Integer> getItemAmountByYear(Item item, int year) {
         Map<String, Integer> answer = new HashMap<>();
-        countries.forEach(country -> {
-            country.getItems().forEach(currentItem -> {
+        for (Country country : countries) {
+            for (Item currentItem : country.getItems()) {
                 if (currentItem.getItemName().equals(item.getItemName())) {
                     answer.put(country.getAreaAbbreviation(), item.getOfDate(year));
                 }
-            });
-        });
+            }
+        }
         return answer;
     }
 
@@ -69,6 +76,7 @@ public class Country implements Comparable<Country> {
     public List<Item> getItems() {
         return items;
     }
+
 
     @Override
     public boolean equals(Object o) {
