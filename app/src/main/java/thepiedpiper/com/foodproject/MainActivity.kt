@@ -1,9 +1,12 @@
 package thepiedpiper.com.foodproject
 
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -21,7 +24,7 @@ import java.io.IOException
 /**
  * This shows how to create a simple activity with a map and a marker on the map.
  */
-class BasicMapDemoActivity :
+class MainActivity :
         AppCompatActivity(),
         OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
@@ -29,17 +32,30 @@ class BasicMapDemoActivity :
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    val SPB = LatLng(60.0, 30.0)
-    val ZOOM_LEVEL = 3f
+    val DEFAULT_POS = LatLng(60.0, 30.0) // SPB
+    val DEFAULT_ZOOM_LEVEL = 3f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
-
         val mapFragment: SupportMapFragment? =
                 supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu_filter, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        super.onOptionsItemSelected(item)
+        if (item!!.itemId == R.id.filter) {
+            startActivity(Intent(this, FilterActivity::class.java))
+        }
+        return true
     }
 
     /**
@@ -48,7 +64,6 @@ class BasicMapDemoActivity :
      */
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap ?: return
-
 
         try {
             // Customise the styling of the base map using a JSON object defined
@@ -73,12 +88,12 @@ class BasicMapDemoActivity :
             var layer = GeoJsonLayer(googleMap, R.raw.countries_geo, getApplicationContext())
             var style = layer.getDefaultPolygonStyle()
 
-            style.setStrokeWidth(4F)
+            style.setStrokeWidth(0F)
 
-            layer.setOnFeatureClickListener({ Toast.makeText(this@BasicMapDemoActivity, it.properties.toString(), Toast.LENGTH_LONG).show() })
+            layer.setOnFeatureClickListener({ Toast.makeText(this@MainActivity, it.properties.toString(), Toast.LENGTH_LONG).show() })
             layer.addLayerToMap()
 
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SPB, ZOOM_LEVEL))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_POS, DEFAULT_ZOOM_LEVEL))
 
         } catch (e: IOException) {
             Log.e("IOException", e.getLocalizedMessage())
