@@ -41,6 +41,7 @@ class MainActivity :
         var item: Item? = null
     }
 
+    var layer: GeoJsonLayer? = null
     var progresssDialog: ProgressDialog? = null
 
     override fun onConnectionFailed(p0: ConnectionResult) {
@@ -53,7 +54,6 @@ class MainActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-        openMap()
         if (!CSVOpener.isSorted) ParseTask().execute()
     }
 
@@ -111,19 +111,19 @@ class MainActivity :
 
         // draw polygons
         try {
-            var layer = GeoJsonLayer(googleMap, R.raw.countries_geo, getApplicationContext())
-            var style = layer.getDefaultPolygonStyle()
+            layer = GeoJsonLayer(googleMap, R.raw.countries_geo, getApplicationContext())
+            val style = layer?.getDefaultPolygonStyle()
 
-            style.setStrokeWidth(0F)
+            style?.setStrokeWidth(0F)
 
-            layer.setOnFeatureClickListener({ Toast.makeText(this@MainActivity, it.getProperty("name"), Toast.LENGTH_SHORT).show() })
+            layer?.setOnFeatureClickListener({ Toast.makeText(this@MainActivity, it.getProperty("name"), Toast.LENGTH_SHORT).show() })
 
             if (item != null && year != null) {
                 val countries = Country.getItemAmountByYear(item, year)
                 var max = Country.maxAmount(countries)
                 if (max == 0) max = 100000
 
-                for (country in layer.features) {
+                for (country in layer!!.features) {
                     if (countries.containsKey(country.id)) {
                         val polygonStyle = GeoJsonPolygonStyle()
                         val kkk = countries[country.id]!!
@@ -134,7 +134,7 @@ class MainActivity :
                 }
             }
 
-            layer.addLayerToMap()
+            layer?.addLayerToMap()
 
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_POS, DEFAULT_ZOOM_LEVEL))
 
@@ -143,6 +143,13 @@ class MainActivity :
         } catch (e: JSONException) {
             Log.e("JSONException", e.getLocalizedMessage())
         }
+
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        layer?.removeLayerFromMap()
     }
 
     private inner class ParseTask : AsyncTask<Void, Void?, Void>() {
